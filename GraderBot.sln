@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraderBot.ConsoleApp", "GraderBot.ConsoleApp\GraderBot.ConsoleApp.csproj", "{9DD418B7-0F0F-4D9D-8BE4-B240AF8B75E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraderBot.Workers", "GraderBot.Workers\GraderBot.Workers.csproj", "{AACE3A97-57DD-45F6-B5E7-C5A813E8856F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraderBot.Utilities", "GraderBot.Utilities\GraderBot.Utilities.csproj", "{56DA7E28-5EFC-43B5-8F62-5500F61CDD9D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraderBot.WebAPI", "GraderBot.WebAPI\GraderBot.WebAPI.csproj", "{788372FE-B660-42A9-87D2-ED63F5DA1C92}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraderBot.ProblemTypes", "GraderBot.ProblemTypes\GraderBot.ProblemTypes.csproj", "{BBF2B268-432C-4EE0-8B7B-65EEC1CB1E36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problems", "Problems", "{C335572B-B469-48A1-BD60-5E931C29D77D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DD418B7-0F0F-4D9D-8BE4-B240AF8B75E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DD418B7-0F0F-4D9D-8BE4-B240AF8B75E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DD418B7-0F0F-4D9D-8BE4-B240AF8B75E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DD418B7-0F0F-4D9D-8BE4-B240AF8B75E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AACE3A97-57DD-45F6-B5E7-C5A813E8856F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AACE3A97-57DD-45F6-B5E7-C5A813E8856F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AACE3A97-57DD-45F6-B5E7-C5A813E8856F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AACE3A97-57DD-45F6-B5E7-C5A813E8856F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56DA7E28-5EFC-43B5-8F62-5500F61CDD9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56DA7E28-5EFC-43B5-8F62-5500F61CDD9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56DA7E28-5EFC-43B5-8F62-5500F61CDD9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56DA7E28-5EFC-43B5-8F62-5500F61CDD9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{788372FE-B660-42A9-87D2-ED63F5DA1C92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{788372FE-B660-42A9-87D2-ED63F5DA1C92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{788372FE-B660-42A9-87D2-ED63F5DA1C92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{788372FE-B660-42A9-87D2-ED63F5DA1C92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBF2B268-432C-4EE0-8B7B-65EEC1CB1E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBF2B268-432C-4EE0-8B7B-65EEC1CB1E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBF2B268-432C-4EE0-8B7B-65EEC1CB1E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBF2B268-432C-4EE0-8B7B-65EEC1CB1E36}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDD3954C-1BF2-4FCA-BBBF-FAE5F5A101CF}
+	EndGlobalSection
+EndGlobal

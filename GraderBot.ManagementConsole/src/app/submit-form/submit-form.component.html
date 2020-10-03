@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <form method="post" class="col-auto" (submit)="onSubmit($event)">
+      <div class="form-group">
+        <label for="problem-title">Problem name</label>
+        <input #problemInput
+               id="problem-title"
+               (input)="search(problemInput.value)"
+               [(ngModel)]="problem"
+               name="problem"
+               type="text"
+               class="form-control"
+               placeholder="Start typing...">
+        <div *ngIf="!isProblemSelected" class="list-group">
+          <a *ngFor="let problemName of problemNames$ | async"
+             class="list-group-item list-group-item-action"
+             (click)="onSelectProblem(problemName)">
+            {{problemName}}
+          </a>
+        </div>
+        <label for="source-code">Source code</label>
+        <input (change)="onFileSelect($event.target)"
+               type="file"
+               class="form-control-file"
+               id="source-code">
+      </div>
+      <button class="btn btn-primary">Submit</button>
+    </form>
+    <div class="col"></div>
+  </div>
+  <div *ngFor="let diff of diffs;  let i = index"
+       [attr.data-index]="i"
+       class="row">
+    <div class="col">
+      <h4>Test {{i+1}}</h4>
+      <td-ngx-text-diff
+        [left]="diff.expected"
+        [right]="diff.actual">
+      </td-ngx-text-diff>
+    </div>
+  </div>
+</div>
