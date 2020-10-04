@@ -1,22 +1,37 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using GraderBot.ProblemTypes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
+using Utf8Json;
 
 namespace GraderBot.WebAPI.Controllers
 {
     using ProblemTypes.ConsoleApplication;
+    using Models;
 
     [Route("Problems/[Controller]")]
     public abstract class ConsoleAppController<TApp> : ControllerBase
     where TApp : IConsoleApp, new()
     {
         private readonly TApp _consoleApp = new TApp();
+
+        private readonly IDeserializer _deserializer = new DeserializerBuilder()
+            .WithNamingConvention(CamelCaseNamingConvention.Instance)
+            .Build();
+
+        protected ConsoleAppController()
+        {
+        }
+
         private const string TempDir = @"D:\Users\pdimp\Temp";
         private const string LecturerSourceDir = @"D:\Users\pdimp\GraderBot\Problems";
 
@@ -26,8 +41,9 @@ namespace GraderBot.WebAPI.Controllers
             if (!Directory.Exists(Path.Combine(LecturerSourceDir, problemName)))
                 return NotFound();
 
-            var problemTempDir = Directory.CreateDirectory(
-                Path.Combine(TempDir, typeof(TApp).Name.Split('`').First() + Path.GetRandomFileName()));
+            var solutionId = $"{typeof(TApp).Name.Split('`').First()}_{DateTime.Now:yyyyMMddHHmmss}_{Guid.NewGuid()}";
+
+            var problemTempDir = Directory.CreateDirectory(Path.Combine(TempDir, solutionId));
 
             var sourcePaths = (
                 Student: problemTempDir.CreateSubdirectory(Path.Combine("_src_actual_")),
@@ -38,23 +54,17 @@ namespace GraderBot.WebAPI.Controllers
             using (var archive = new ZipArchive(stream))
                 archive.ExtractToDirectory(sourcePaths.Student.FullName);
 
-            var startupClass =
-                await System.IO.File.ReadAllTextAsync(
-                    sourcePaths.Lecturer.GetFiles("startupClass.txt").First().FullName);
+            var config = _deserializer
+                .Deserialize<ConsoleAppConfig>(await System.IO.File
+                    .ReadAllTextAsync(sourcePaths.Lecturer
+                        .GetFiles("config.yaml")
+                        .First()
+                        .FullName));
 
-            var input = await Task.WhenAll(sourcePaths.Lecturer
-                .GetFiles("input*.txt")
-                .Select(f => System.IO.File.ReadAllTextAsync(f.FullName)
-                    .ContinueWith(s =>
-                        !s.Result.EndsWith("\n")
-                            ? s.Result.Contains("\r\n")
-                                ? s.Result + "\r\n"
-                                : s.Result + '\n'
-                            : s.Result)));
-
-            var results = await _consoleApp.TestAsync(problemTempDir, sourcePaths.Student, sourcePaths.Lecturer, startupClass, input, true);
-
-            return Content(Utf8Json.JsonSerializer.ToJsonString(results), MediaTypeNames.Application.Json, Encoding.UTF8);
+            var result = await _consoleApp.TestAsync(problemTempDir, sourcePaths, config.StartupClass, config.Input, true);
+            result.Id = solutionId;
+            
+            return Content(JsonSerializer.ToJsonString(result), MediaTypeNames.Application.Json, Encoding.UTF8);
         }
 
         [HttpGet("ListAll")]
@@ -62,7 +72,7 @@ namespace GraderBot.WebAPI.Controllers
         public IActionResult ListAll(string pattern = ".*")
         {
             var regex = new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            return Content(Utf8Json.JsonSerializer
+            return Content(JsonSerializer
                 .ToJsonString(new DirectoryInfo(LecturerSourceDir)
                     .GetDirectories()
                     .Select(d => d.Name)

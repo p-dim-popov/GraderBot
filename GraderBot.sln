@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraderBot.WebAPI", "GraderB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraderBot.ProblemTypes", "GraderBot.ProblemTypes\GraderBot.ProblemTypes.csproj", "{BBF2B268-432C-4EE0-8B7B-65EEC1CB1E36}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problems", "Problems", "{C335572B-B469-48A1-BD60-5E931C29D77D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

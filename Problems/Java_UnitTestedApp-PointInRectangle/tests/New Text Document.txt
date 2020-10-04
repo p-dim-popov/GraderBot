@@ -1,0 +1,1 @@
+javac -cp .;./lib/*.jar ./src/eu/nvna/Main.java -d out #works but not in powershell, TODO: probably copy lib/ to out dir as well

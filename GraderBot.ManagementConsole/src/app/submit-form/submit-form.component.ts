@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
-import {DiffsDto} from '../diffs-dto';
+import {OutputsDto} from '../outputs-dto';
 import { DiffContent, DiffResults } from 'ngx-text-diff/lib/ngx-text-diff.model';
+import {SolutionDto} from '../solution-dto';
 
 @Component({
   selector: 'app-submit-form',
@@ -18,7 +19,7 @@ export class SubmitFormComponent implements OnInit {
   private searchTerms = new Subject<string>();
   private solutionFile: File;
   isProblemSelected = false;
-  diffs: DiffsDto[];
+  solution: SolutionDto;
 
   constructor(
     private httpClient: HttpClient
@@ -43,9 +44,9 @@ export class SubmitFormComponent implements OnInit {
     const formData = new FormData();
     formData.append('problemSolution', this.solutionFile);
 
-    this.httpClient.post<DiffsDto[]>(`${this.SERVER_URL}/Submit/${this.problem}`, formData)
+    this.httpClient.post<SolutionDto>(`${this.SERVER_URL}/Submit/${this.problem}`, formData)
       .subscribe(
-        (res) => this.diffs = res,
+        (res) => this.solution = res,
         (err) => console.log(err)
       );
   }

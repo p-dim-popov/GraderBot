@@ -1,7 +1,7 @@
-import { DiffsDto } from './diffs-dto';
+import { OutputsDto } from './outputs-dto';
 
 describe('DiffsDto', () => {
   it('should create an instance', () => {
-    expect(new DiffsDto()).toBeTruthy();
+    expect(new OutputsDto()).toBeTruthy();
   });
 });

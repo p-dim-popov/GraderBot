@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GraderBot.Workers.Runners
@@ -10,14 +11,14 @@ namespace GraderBot.Workers.Runners
     {
         public abstract string Name { get; }
         protected abstract string CollectArgs(DirectoryInfo root, string className);
-        public virtual (Process RunningProcess, Task<Process> Task) RunAsync(DirectoryInfo root, string className)
+        public virtual Process Run(DirectoryInfo root, string className)
         {
             var runner = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "powershell",
-                    Arguments = @$"-Command ""{Name} {CollectArgs(root, className)}""",
+                    FileName = Name,
+                    Arguments = CollectArgs(root, className),
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     RedirectStandardInput = true,
@@ -26,8 +27,8 @@ namespace GraderBot.Workers.Runners
                 },
                 EnableRaisingEvents = true,
             };
-
-            return (runner, runner.StartAsync());
+            runner.Start();
+            return runner;
         }
     }
 }

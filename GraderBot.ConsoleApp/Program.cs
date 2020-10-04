@@ -8,23 +8,8 @@ namespace GraderBot.ConsoleApp
 
     internal class Program
     {
-        private static async Task Main(string[] args)
+        private static void Main(string[] args)
         {
-            // var jca = new JavaConsoleApplication();
-            // var results = await jca.TestAsync("D:\\Users\\pdimp\\Temp",
-            //     "D:\\Users\\pdimp\\CodingPlayground\\reflection-samples\\java-student-code",
-            //     "D:\\Users\\pdimp\\CodingPlayground\\reflection-samples\\java-lecturer-code",
-            //     "example.Project01",
-            //     new []
-            //     {
-            //         "Premiere\n" +
-            //         "10\n" +
-            //         "12\n"
-            //     }, 
-            //     true);
-            
-            // foreach (var resultDiffDto in results)
-            //     Console.WriteLine(JsonSerializer.ToJsonString(resultDiffDto));
         }
     }
 }

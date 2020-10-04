@@ -1,18 +1,19 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using GraderBot.Workers.Compilers;
-using GraderBot.Workers.Runners;
 
 namespace GraderBot.ProblemTypes.ConsoleApplication
 {
+    using Workers.Compilers;
+    using Workers.Runners;
+
     public interface IConsoleApp
     {
         public ICompiler Compiler { get; }
         public IRunner Runner { get; }
 
-        public Task<DiffsDto[]> TestAsync(DirectoryInfo tempDir,
-            DirectoryInfo studentFilesPath,
-            DirectoryInfo lecturerFilesPath,
+        public Task<SolutionDto> TestAsync(
+            DirectoryInfo tempDir,
+            (DirectoryInfo student, DirectoryInfo lecturer) sources,
             string className,
             string[] input,
             bool cleanOutputFiles = false);
