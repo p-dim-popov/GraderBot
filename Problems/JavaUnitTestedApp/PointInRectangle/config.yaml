@@ -1,6 +1,9 @@
 startupClass: eu.nvna.Main
 input:
-    - CheckIfMembersExist
-    - CheckIfFunctionsExist
-    - CheckFunctionality
+  - | 
+    eu.nvna.tests.TestMembersExistence
+  - |
+    eu.nvna.tests.TestFunctionsExistence
+  - |
+    eu.nvna.tests.TestFunctionality
 taskDescription: 'Create a class Point and a class Rectangle. The Point should hold coordinates X and Y and the Rectangle should hold 2 Points – its bottom left and top right corners. In the Rectangle class, you should implement a contains(Point point) method that returns true or false, based on whether the Point given as attribute is inside or outside of the Rectangle object. Points on the side of a Square are considered inside.'

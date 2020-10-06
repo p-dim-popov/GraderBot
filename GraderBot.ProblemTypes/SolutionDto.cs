@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Runtime.Serialization;
-using DiffMatchPatch;
 
 namespace GraderBot.ProblemTypes
 {
     public class SolutionDto
     {
-        public SolutionDto(int inputLength)
+        public SolutionDto(string[] expected, string[] actual, string id)
         {
-            this.Outputs = new OutputsDto[inputLength];
+            this.Outputs = Enumerable.Range(0, expected.Length)
+                .Select(i => new OutputsDto(expected[i]?.Trim(), actual[i]?.Trim()))
+                .ToArray();
+            this.Id = id;
         }
 
         [DataMember(Name = "outputs")]

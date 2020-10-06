@@ -11,9 +11,9 @@ namespace GraderBot.ProblemTypes.ConsoleApplication
         public ICompiler Compiler { get; }
         public IRunner Runner { get; }
 
-        public Task<SolutionDto> TestAsync(
+        public Task<string[]> TestAsync(
             DirectoryInfo tempDir,
-            (DirectoryInfo student, DirectoryInfo lecturer) sources,
+            DirectoryInfo studentSources,
             string className,
             string[] input,
             bool cleanOutputFiles = false);

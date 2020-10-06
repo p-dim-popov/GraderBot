@@ -7,7 +7,6 @@ import org.junit.Test;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -18,6 +17,7 @@ public class TestMembersExistence {
     public void checkIfPointMembersExist() {
         Supplier<Stream<Field>> fieldsSupplier =
                 () -> Arrays.stream(Point.class.getDeclaredFields());
+
         var fieldX = fieldsSupplier
                 .get()
                 .filter(f -> f.getName().equals("x"))

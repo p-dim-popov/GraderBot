@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
 
 namespace GraderBot.ProblemTypes.UnitTestApplication
 {
     public interface IUnitTestedApp
     {
-        public Task<SolutionDto> TestAsync(
+        public Task<string[]> TestAsync(
             DirectoryInfo tempDir,
-            (DirectoryInfo Student, DirectoryInfo Lecturer) sources,
+            DirectoryInfo sourcesStudent,
             DirectoryInfo unitTestsPath,
             string className,
             string[] input,

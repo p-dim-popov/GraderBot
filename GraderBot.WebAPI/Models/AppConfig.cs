@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace GraderBot.WebAPI.Models
+﻿namespace GraderBot.WebAPI.Models
 {
-    public class ConsoleAppConfig
+    public class AppConfig
     {
         public string StartupClass { get; set; }
         public string[] Input { get; set; }

@@ -1,0 +1,7 @@
+javac -cp .;./lib/*.jar ./src/eu/nvna/Main.java -d out #works but not in powershell, TODO: probably copy lib/ to out dir as well
+
+#to compile
+D:\Users\pdimp\GraderBot\Problems\Java_UnitTestedApp-PointInRectangle\tests>javac -cp .;lib/junit-4.13.jar;lib/hamcrest-core-1.3.jar D:\Users\pdimp\GraderBot\Problems\Java_UnitTestedApp-PointInRectangle\tests\src\eu\nvna\classes\Point.java D:\Users\pdimp\GraderBot\Problems\Java_UnitTestedApp-PointInRectangle\tests\src\eu\nvna\classes\Rectangle.java D:\Users\pdimp\GraderBot\Problems\Java_UnitTestedApp-PointInRectangle\tests\src\eu\nvna\tests\TestFunctionality.java D:\Users\pdimp\GraderBot\Problems\Java_UnitTestedApp-PointInRectangle\tests\src\eu\nvna\tests\TestFunctionsExistence.java D:\Users\pdimp\GraderBot\Problems\Java_UnitTestedApp-PointInRectangle\tests\src\eu\nvna\tests\TestMembersExistence.java ./src/eu/nvna/Main.java -d out
+
+#to run
+D:\Users\pdimp\GraderBot\Problems\Java_UnitTestedApp-PointInRectangle\tests\out>java -cp .;../lib/junit-4.13.jar;../lib/hamcrest-core-1.3.jar eu.nvna.Main

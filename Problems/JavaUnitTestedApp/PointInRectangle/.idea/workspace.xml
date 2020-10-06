@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="93fb2d3f-2e77-4777-a3e3-45e3d2c9e88a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.ConsoleApp/GraderBot.ConsoleApp.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.ConsoleApp/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.ManagementConsole/src/app/submit-form/submit-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../GraderBot.ManagementConsole/src/app/submit-form/submit-form.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.ManagementConsole/src/app/submit-form/submit-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../GraderBot.ManagementConsole/src/app/submit-form/submit-form.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.ProblemTypes/ConsoleApplication/ConsoleApp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../GraderBot.ProblemTypes/ConsoleApplication/ConsoleApp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.ProblemTypes/ConsoleApplication/IConsoleApp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../GraderBot.ProblemTypes/ConsoleApplication/IConsoleApp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.ProblemTypes/SolutionDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../GraderBot.ProblemTypes/SolutionDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.ProblemTypes/UnitTestApplication/IUnitTestedApp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../GraderBot.ProblemTypes/UnitTestApplication/IUnitTestedApp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.ProblemTypes/UnitTestApplication/UnitTestedApp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../GraderBot.ProblemTypes/UnitTestApplication/UnitTestedApp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.WebAPI/Controllers/ConsoleAppController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../GraderBot.WebAPI/Controllers/ConsoleAppController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.WebAPI/Models/ConsoleAppConfig.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.Workers/Compilers/JavaCompiler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../GraderBot.Workers/Compilers/JavaCompiler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.Workers/Runners/JavaRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../GraderBot.Workers/Runners/JavaRunner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../GraderBot.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../../GraderBot.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_ConsoleApp-Cinema/config.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_ConsoleApp-Cinema/src/example/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/config.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/skeleton/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/skeleton/.idea/description.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/skeleton/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/skeleton/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/skeleton/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/skeleton/.idea/project-template.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/skeleton/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/skeleton/skeleton.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/skeleton/src/eu/nvna/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/skeleton/src/eu/nvna/figures/Point.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/skeleton/src/eu/nvna/figures/Rectangle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/.idea/description.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/.idea/project-template.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/New Text Document.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/lib/hamcrest-core-1.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/lib/junit-4.13.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/src/eu/nvna/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/src/eu/nvna/classes/Point.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/src/eu/nvna/classes/Rectangle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/src/eu/nvna/tests/TestMembersExistence.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_UnitTestedApp-PointInRectangle/tests/tests.iml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="1iW2N4RaU20PrwzH3jbQgwjdExH" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="93fb2d3f-2e77-4777-a3e3-45e3d2c9e88a" name="Default Changelist" comment="" />
+      <created>1602008983679</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602008983679</updated>
+      <workItem from="1602008986306" duration="27000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+</project>

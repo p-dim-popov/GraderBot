@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col"></div>
-    <form method="post" class="col-auto" (submit)="onSubmit($event)">
+    <form method="post" class="col-auto" (submit)="onSubmit($event, submitBtn)">
       <div class="form-group">
         <label for="problem-title">Problem name</label>
         <input #problemInput
@@ -25,7 +25,20 @@
                class="form-control-file"
                id="source-code">
       </div>
-      <button class="btn btn-primary">Submit</button>
+      <button #submitBtn class="btn btn-primary">Submit</button>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Choose app type: </div>
+        </div>
+        <select [(ngModel)]="appType"
+                id="problem-types"
+                name="problem-types"
+                class="form-control">
+          <option *ngFor="let appType of apps | keyvalue" value="{{appType.value}}">
+            {{appType.key}}
+          </option>
+        </select>
+      </div>
     </form>
     <div class="col"></div>
   </div>

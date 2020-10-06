@@ -3,7 +3,7 @@ import {Observable, Subject} from 'rxjs';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {OutputsDto} from '../outputs-dto';
-import { DiffContent, DiffResults } from 'ngx-text-diff/lib/ngx-text-diff.model';
+import {DiffContent, DiffResults} from 'ngx-text-diff/lib/ngx-text-diff.model';
 import {SolutionDto} from '../solution-dto';
 
 @Component({
@@ -12,8 +12,14 @@ import {SolutionDto} from '../solution-dto';
   styleUrls: ['./submit-form.component.css']
 })
 export class SubmitFormComponent implements OnInit {
-  SERVER_URL = 'https://localhost:44347/Problems/JavaConsoleApp';
+  SERVER_URL = 'https://localhost:44347/Problems';
 
+  apps = {
+    'Java Console Application': 'JavaConsoleApp',
+    'Java Unit Tested Application': 'JavaUnitTestedApp'
+  };
+
+  appType: string;
   problem: string;
   problemNames$: Observable<string[]>;
   private searchTerms = new Subject<string>();
@@ -32,21 +38,25 @@ export class SubmitFormComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((term: string) =>
         this.httpClient
-          .get<string[]>(`${this.SERVER_URL}/ListAll/${encodeURIComponent(term || '$^')}`)
+          .get<string[]>(`${this.SERVER_URL}/${this.appType}/ListAll/${encodeURIComponent(term || '$^')}`)
           .toPromise()
           .catch(err => [err.message]))
     );
   }
 
-  onSubmit($event: Event): void {
+  onSubmit($event: Event, submitBtn: HTMLButtonElement): void {
     $event.preventDefault();
+    submitBtn.disabled = true;
 
     const formData = new FormData();
     formData.append('problemSolution', this.solutionFile);
 
-    this.httpClient.post<SolutionDto>(`${this.SERVER_URL}/Submit/${this.problem}`, formData)
+    this.httpClient.post<SolutionDto>(`${this.SERVER_URL}/${this.appType}/Submit/${this.problem}`, formData)
       .subscribe(
-        (res) => this.solution = res,
+        (res) => {
+          this.solution = res;
+          submitBtn.disabled = false;
+        },
         (err) => console.log(err)
       );
   }
