@@ -1,4 +1,10 @@
 <div class="container">
+  <div *ngIf="taskDescription">
+    <label for="task-description">Task Description: </label>
+    <textarea class="form-control"
+              id="task-description"
+              disabled>{{taskDescription}}</textarea>
+  </div>
   <div class="row">
     <div class="col"></div>
     <form method="post" class="col-auto" (submit)="onSubmit($event, submitBtn)">
@@ -19,16 +25,21 @@
             {{problemName}}
           </a>
         </div>
+
         <label for="source-code">Source code</label>
         <input (change)="onFileSelect($event.target)"
                type="file"
                class="form-control-file"
                id="source-code">
       </div>
+      <button (click)="onGetTask()"
+              type="button"
+              class="btn btn-secondary">Task Description
+      </button>
       <button #submitBtn class="btn btn-primary">Submit</button>
       <div class="input-group">
         <div class="input-group-prepend">
-          <div class="input-group-text">Choose app type: </div>
+          <div class="input-group-text">Choose app type:</div>
         </div>
         <select [(ngModel)]="appType"
                 id="problem-types"
@@ -51,7 +62,7 @@
        [attr.data-index]="i"
        class="row">
     <div class="col">
-      <h4>Test {{i+1}}</h4>
+      <h4>Test {{i + 1}}</h4>
       <td-ngx-text-diff
         [left]="out.expected"
         [right]="out.actual">

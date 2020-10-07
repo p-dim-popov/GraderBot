@@ -1,0 +1,61 @@
+startupClass: eu.nvna.Main
+input:
+  - | 
+    eu.nvna.tests.TestPrivateMembers
+  - |
+    eu.nvna.tests.TestConstructors
+  - |
+    eu.nvna.tests.TestGetters
+  - |
+    eu.nvna.tests.TestMethodCalcArea
+  - |
+    eu.nvna.tests.TestMethodCompareTo
+  - |
+    eu.nvna.tests.TestMethodToString
+  - |
+    eu.nvna.tests.TestMethodEquals
+  - |
+    eu.nvna.tests.TestXYTranslationMethods
+  - |
+    eu.nvna.tests.TestMethodIsInside
+  - |
+    eu.nvna.tests.TestMethodUnionRect
+  - | 
+    eu.nvna.tests.TestMethodIntersectionRect
+taskDescription: |-
+    Да се състави клас Rectangle в двумерното пространство  
+    Скрити член променливи
+        int iX1, iY1, iX2, iY2; 
+    Публични методи
+        Конструктори
+            1) Подразбиращ се public Rectangle() 
+            2) Експлицитен public Rectangle(int x1, int y1, int x2, int y2);  
+        Методи 
+            3) четене на членовете getIX1, getIX2, getIY1,getIY2  
+            4) Изчислява/връща площ на правоъгълника 
+                (int calcArea())
+            5) Сравнява с подадения като параметър за "по-малък" по площ -1,0,+1  
+                (public int compareTo(Object r)) 
+            6) Стрингова интерпретация на обектите
+                (public String toString())
+            7)Еквивалентност с подадения параметър – по площ
+                (public boolean equals(Rectangle r))
+            8)Изместване по X на подадените точки
+                (public void translateX(int iPoints)) 
+            9) Изместване по Y на подадените точки
+                (public void translateY(int iPoints))
+            10) Изместване по X и Y на подадените точки
+                (public void translateXY(int iPoints))
+            11) Точката с координати ptX и ptY в правоъгълника ли са
+                (public boolean isInside(int ptX, int ptY ))
+            12) Изчислява/връща обграждащ правоъгълник с подадения параметър
+                (public Rectangle unionRect(Rectangle r) )
+            13) Изчислява/връща общ правоъгълник между подадения параметър и члена
+                (public Rectangle intersectionRect( Rectangle r)) 
+    Главна функция 
+        Създава обекти, извежда 
+        Измества по Х и Y, извежда, 
+        Проверява за еквивалентност,извежда 
+        Проверява за по-малко,извежда 
+        Изчислява обграждащ правоъгълник, извежда 
+        Изчислява общ правоъгълник, извежда

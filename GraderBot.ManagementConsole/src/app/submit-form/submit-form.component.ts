@@ -19,6 +19,7 @@ export class SubmitFormComponent implements OnInit {
     'Java Unit Tested Application': 'JavaUnitTestedApp'
   };
 
+  taskDescription: string;
   appType: string;
   problem: string;
   problemNames$: Observable<string[]>;
@@ -80,5 +81,11 @@ export class SubmitFormComponent implements OnInit {
 
   onFocusOut(): void {
     this.isProblemSelected = true;
+  }
+
+  onGetTask(): void {
+    this.httpClient
+      .get(`${this.SERVER_URL}/${this.appType}/TaskDescription/${this.problem}`, {responseType: 'text'})
+      .subscribe(s => this.taskDescription = s);
   }
 }

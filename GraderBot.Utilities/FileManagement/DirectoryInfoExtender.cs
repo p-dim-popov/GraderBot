@@ -82,5 +82,11 @@ namespace GraderBot.Utilities.FileManagement
                 }
             });
         }
+
+        public static async Task CreateTextFile(this DirectoryInfo dir, string filename, string contents)
+        {
+            await using var file = File.CreateText(Path.Combine(dir.FullName, filename));
+            await file.WriteAsync(contents);
+        }
     }
 }
