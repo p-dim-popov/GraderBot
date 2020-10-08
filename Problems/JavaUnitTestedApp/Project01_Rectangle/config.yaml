@@ -1,7 +1,7 @@
 startupClass: eu.nvna.Main
 input:
   - | 
-    eu.nvna.tests.TestPrivateMembers
+    eu.nvna.tests.TestPrivateFields
   - |
     eu.nvna.tests.TestConstructors
   - |

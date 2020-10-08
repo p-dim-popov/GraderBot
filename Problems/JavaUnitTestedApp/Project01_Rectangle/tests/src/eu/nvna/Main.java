@@ -28,7 +28,8 @@ public class Main {
         TestExecutionSummary summary = listener.getSummary();
 
         for (var failure : summary.getFailures()) {
-            System.out.println(failure.toString());
+            System.out.println(failure.getTestIdentifier().getDisplayName() + " failed!");
+            System.out.println(failure.getException().toString());
         }
 
         System.out.println("Tests=" + summary.getTestsFoundCount() + ","
