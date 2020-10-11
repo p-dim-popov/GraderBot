@@ -7,11 +7,13 @@ import {AppComponent} from './app.component';
 import {SubmitFormComponent} from './submit-form/submit-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgxTextDiffModule } from 'ngx-text-diff';
+import { SolutionResultsComponent } from './solution-results/solution-results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SubmitFormComponent
+    SubmitFormComponent,
+    SolutionResultsComponent
   ],
   imports: [
     BrowserModule,

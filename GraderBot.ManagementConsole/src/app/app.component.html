@@ -1,1 +1,5 @@
 <app-submit-form></app-submit-form>
+<app-solution-results *ngIf="solution"
+                      [id]="solution?.id"
+                      [outputs]="solution?.outputs">
+</app-solution-results>

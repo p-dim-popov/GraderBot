@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <h3>
+      Solution: {{id}}
+    </h3>
+  </div>
+  <div *ngFor="let out of outputs; let i = index"
+       [attr.data-index]="i"
+       class="row">
+    <div class="col">
+      <h4>Test {{i + 1}}</h4>
+      <td-ngx-text-diff
+        [left]="out.expected"
+        [right]="out.actual">
+      </td-ngx-text-diff>
+    </div>
+  </div>
+</div>
+
