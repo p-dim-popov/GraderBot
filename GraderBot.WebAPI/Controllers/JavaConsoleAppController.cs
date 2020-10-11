@@ -1,5 +1,6 @@
 ﻿namespace GraderBot.WebAPI.Controllers
 {
+    using UnitOfWork;
     using Workers.Compilers;
     using Workers.Runners;
 
@@ -8,5 +9,9 @@
     public class JavaConsoleAppController
         : ConsoleAppController<ConsoleApp<JavaCompiler, JavaRunner>>
     {
+        public JavaConsoleAppController(AppUnitOfWork unitOfWork)
+            : base(unitOfWork)
+        {
+        }
     }
 }

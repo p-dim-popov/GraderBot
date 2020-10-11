@@ -1,11 +1,9 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System;
+using System.IO;
 using System.Net.Mime;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using GraderBot.Utilities.FileManagement;
 using Microsoft.AspNetCore.Mvc;
 using Utf8Json;
 using YamlDotNet.Serialization;
@@ -13,53 +11,53 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace GraderBot.WebAPI.Controllers
 {
-    using Models;
+    using Database.Models.Enums;
+    using UnitOfWork;
+
 
     [Route("Problems/[controller]")]
     [ApiController]
     public abstract class AppController<TApp> : ControllerBase
      where TApp : new()
     {
-        protected static readonly string TempDirectory = 
+        protected readonly AppUnitOfWork _unitOfWork;
+
+        protected static readonly string TempDirectory =
             Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Problems\Output");
         protected readonly string LecturerSourceDirectory;
+
+        protected readonly string AppTypeName;
 
         protected readonly TApp _app = new TApp();
 
         protected readonly IDeserializer _deserializer = new DeserializerBuilder()
             .WithNamingConvention(CamelCaseNamingConvention.Instance)
             .Build();
-        protected AppController()
+
+
+        protected AppController(AppUnitOfWork unitOfWork)
         {
-            this.LecturerSourceDirectory =
-                Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location),
-                    $@"Problems\{GetType().Name.Replace("Controller", "")}");
+            _unitOfWork = unitOfWork;
+            this.AppTypeName = GetType().Name.Replace("Controller", "");
+            this.LecturerSourceDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), $@"Problems\{AppTypeName}");
         }
 
         [HttpGet("ListAll")]
         [HttpGet("ListAll/{pattern}")]
-        public IActionResult ListAll(string pattern = ".*")
+        public async Task<IActionResult> ListAll(string pattern)
         {
-            var regex = new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             return Content(JsonSerializer
-                .ToJsonString(new DirectoryInfo(LecturerSourceDirectory)
-                    .GetDirectories()
-                    .Select(d => d.Name)
-                    .Where(n => regex.IsMatch(n))), MediaTypeNames.Application.Json, Encoding.UTF8);
+                .ToJsonString(await _unitOfWork.ProblemRepository
+                    .GetProblemNamesByTypeAndNamePatternAsync(AppTypeName, pattern ?? "")),
+                MediaTypeNames.Application.Json, Encoding.UTF8);
         }
 
-        [HttpGet("TaskDescription/{problemName}")]
-        public async Task<IActionResult> TaskDescription(string problemName)
+        [HttpGet("Description/{problemName}")]
+        public async Task<IActionResult> Description(string problemName)
         {
-            return Content(_deserializer
-                .Deserialize<AppConfig>(await System.IO.File
-                    .ReadAllTextAsync(new DirectoryInfo(LecturerSourceDirectory)
-                        .GetDirectories(problemName)
-                        .First(d => d.Name == problemName)
-                        .GetFiles("config.yaml")
-                        .First()
-                        .FullName))
-                .TaskDescription, MediaTypeNames.Text.Plain, Encoding.UTF8);
+            return Content(await _unitOfWork.ProblemRepository
+                    .GetDescriptionByTypeAndNameAsync(AppTypeName, problemName),
+                MediaTypeNames.Text.Plain, Encoding.UTF8);
         }
     }
 }

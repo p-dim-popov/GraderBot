@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,51 +10,53 @@ using Utf8Json;
 
 namespace GraderBot.WebAPI.Controllers
 {
+    using Models;
+    using UnitOfWork;
     using ProblemTypes;
     using ProblemTypes.ConsoleApplication;
-    using Models;
-    using Utilities.FileManagement;
 
 
     public abstract class ConsoleAppController<TApp> : AppController<TApp>
     where TApp : IConsoleApp, new()
     {
+        protected ConsoleAppController(AppUnitOfWork unitOfWork) 
+            : base(unitOfWork)
+        {
+        }
 
         [HttpPost("Submit/{problemName}")]
         public async Task<IActionResult> Submit(string problemName, [FromForm] IFormFile problemSolution)
         {
-            if (!Directory.Exists(Path.Combine(LecturerSourceDirectory, problemName)))
+            //TODO: test
+            var problem =
+                await _unitOfWork.ProblemRepository
+                    .GetProblemByTypeAndNameAsync(AppTypeName, problemName);
+
+            if (problem is null)
                 return NotFound();
 
-            var solutionId = $"{typeof(TApp).Name.Split('`').First()}_{DateTime.Now:yyyyMMddHHmmss}_{Guid.NewGuid()}";
+            var solutionGuid = Guid.NewGuid();
 
-            var solutionDirectory = Directory.CreateDirectory(Path.Combine(TempDirectory, solutionId));
+            var solutionDirectory = Directory.CreateDirectory(Path.Combine(TempDirectory, solutionGuid.ToString()));
 
-            var sourcePaths = (
-                Student: solutionDirectory.CreateSubdirectory(Path.Combine("_src_actual_")),
-                Lecturer: new DirectoryInfo(Path.Combine(LecturerSourceDirectory, problemName))
-            );
+            var sourcePath = solutionDirectory.CreateSubdirectory("_src_actual_");
 
             await using (var stream = problemSolution.OpenReadStream())
             using (var archive = new ZipArchive(stream))
-                archive.ExtractToDirectory(sourcePaths.Student.FullName);
+                archive.ExtractToDirectory(sourcePath.FullName);
 
             var config = _deserializer
-                .Deserialize<AppConfig>(await System.IO.File
-                    .ReadAllTextAsync(sourcePaths.Lecturer
-                        .GetFiles("config.yaml")
-                        .First()
-                        .FullName));
+                .Deserialize<AppConfig>(problem.Config);
 
             var outputs = await Task.WhenAll(
-                JsonSerializer.DeserializeAsync<string[]>(System.IO.File.OpenRead(sourcePaths.Lecturer.GetFiles("output.json").First().FullName)),
-                _app.TestAsync(solutionDirectory, sourcePaths.Student, config.StartupClass, config.Input, true)
+                _unitOfWork.ResultRepository.GetResultsOutputByProblemIdAndUserIdAsync(problem.Id, problem.AuthorId),
+                _app.TestAsync(solutionDirectory, sourcePath, config.StartupClass, config.Input, true)
             );
 
-            var solution = new SolutionDto(outputs[0], outputs[1], solutionId);
+            var solution = new SolutionDto(outputs[0], outputs[1], solutionGuid.ToString().ToUpper());
             var jsonSolution = JsonSerializer.ToJsonString(solution);
 
-            _ = solutionDirectory.CreateTextFile("output.json", jsonSolution);
+            //TODO: add solution to database
 
             return Content(jsonSolution, MediaTypeNames.Application.Json, Encoding.UTF8);
         }

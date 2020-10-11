@@ -88,7 +88,7 @@ public class TestConstructors {
 
     private static Stream<Arguments> provideArgsForExplicitConstructorsShouldBehaveAsExpected() {
         return Stream.of(
-                Arguments.of(0, 1, 2, 3, 4),
+                Arguments.of(0, 1, 2, 3),
                 Arguments.of(5, 6, 7, 8),
                 Arguments.of(99, 88, 77, 66),
                 Arguments.of(-1,2,-5,34)

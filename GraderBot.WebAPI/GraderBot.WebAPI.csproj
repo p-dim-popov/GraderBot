@@ -12,6 +12,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\GraderBot.Database.Models\GraderBot.Database.Models.csproj" />
+      <ProjectReference Include="..\GraderBot.Database\GraderBot.Database.csproj" />
       <ProjectReference Include="..\GraderBot.ProblemTypes\GraderBot.ProblemTypes.csproj" />
     </ItemGroup>
 
@@ -19,10 +21,6 @@
       <PackageReference Include="Utf8Json" Version="1.3.7" />
       <PackageReference Include="YamlDotNet" Version="8.1.2" />
     </ItemGroup>
-
-    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-      <Exec Command="XCOPY &quot;$(SolutionDir)Problems\&quot; &quot;$(TargetDir)Problems\&quot; /S /Y" />
-    </Target>
 
 
 </Project>

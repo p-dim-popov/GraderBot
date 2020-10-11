@@ -2,13 +2,12 @@ package eu.nvna.tests;
 
 import eu.nvna.classes.Rectangle;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +16,7 @@ import java.util.stream.Stream;
 public class TestGetters {
     private final List<Method> _getters =
             Arrays.stream(Rectangle.class.getDeclaredMethods())
-                    .filter(m -> m.getName().matches("get.*"))
+                    .filter(m -> m.getName().startsWith("get"))
                     .collect(Collectors.toList());
 
 

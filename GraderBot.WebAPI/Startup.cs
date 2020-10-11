@@ -1,11 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace GraderBot.WebAPI
 {
+    using Database.Data;
+    using UnitOfWork;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -25,6 +29,10 @@ namespace GraderBot.WebAPI
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
             });
 
+            services.AddDbContext<GraderBotContext>(options => 
+                options.UseNpgsql(Configuration.GetConnectionString("GraderBotContext")));
+
+            services.AddScoped<AppUnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
