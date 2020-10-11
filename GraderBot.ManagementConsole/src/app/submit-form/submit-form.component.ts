@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {combineAll, debounceTime, distinctUntilChanged, switchAll, switchMap} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {SolutionService} from '../solution.service';
 
 @Component({
@@ -14,10 +14,10 @@ export class SubmitFormComponent implements OnInit {
     'Java Unit Tested Application': 'JavaUnitTestedApp'
   };
 
-  taskDescription: string;
+  problemDescription: string;
   appType: string;
   problem: string;
-  problemNames$: Observable<string[]>;
+  namePattern$: Observable<string[]>;
   private searchTerms = new Subject<string>();
   private solutionFile: File;
   isProblemSelected = false;
@@ -28,7 +28,7 @@ export class SubmitFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.problemNames$ = this.searchTerms.pipe(
+    this.namePattern$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) =>
@@ -38,11 +38,12 @@ export class SubmitFormComponent implements OnInit {
     );
   }
 
-  onSubmit($event: Event, submitBtn: HTMLButtonElement): void {
+  async onSubmit($event: Event, submitBtn: HTMLButtonElement): Promise<void> {
     $event.preventDefault();
-    // submitBtn.disabled = true;
+    submitBtn.disabled = true;
 
-    this.solutionService.submitSolution(this.appType, this.problem, this.solutionFile);
+    await this.solutionService.submitSolution(this.appType, this.problem, this.solutionFile);
+    submitBtn.disabled = false;
   }
 
   search(term: string): void {
@@ -62,8 +63,16 @@ export class SubmitFormComponent implements OnInit {
     }
   }
 
-  onGetTask(): void {
+  onGetProblemDescription(showProblemDescriptionBtn: HTMLButtonElement): void {
+    showProblemDescriptionBtn.disabled = true;
     this.solutionService.getTaskDescription(this.appType, this.problem)
-      .subscribe(td => this.taskDescription = td);
+      .subscribe(td => {
+        this.problemDescription = td;
+        showProblemDescriptionBtn.disabled = false;
+      });
+  }
+
+  onProblemTypeSelect(problemInput: HTMLInputElement): void {
+    problemInput.disabled = false;
   }
 }

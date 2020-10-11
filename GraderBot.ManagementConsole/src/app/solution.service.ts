@@ -26,7 +26,7 @@ export class SolutionService {
 
   getTaskDescription(appType: string, problem: string): Observable<string> {
     return this.httpClient
-      .get(`${this.SERVER_URL}/${appType}/TaskDescription/${problem}`, {responseType: 'text'});
+      .get(`${this.SERVER_URL}/${appType}/Description/${problem}`, {responseType: 'text'});
   }
 
   getProblemsByName(appType: string, term: string): Observable<string[]> {
