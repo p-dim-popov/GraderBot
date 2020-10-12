@@ -62,7 +62,7 @@ __webpack_require__.r(__webpack_exports__);
 class SolutionService {
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.SERVER_URL = 'https://localhost:44347/Problems';
+        this.SERVER_URL = 'https://graderbot.herokuapp.com/Problems';
         this.solution$ = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
     }
     submitSolution(appType, problem, solution) {

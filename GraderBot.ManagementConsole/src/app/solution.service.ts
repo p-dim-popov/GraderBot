@@ -8,7 +8,7 @@ import {multicast, refCount} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SolutionService {
-  SERVER_URL = 'https://localhost:44347/Problems';
+  SERVER_URL = 'https://graderbot.herokuapp.com/Problems';
   solution$ = new Subject<SolutionDto>();
 
   constructor(
