@@ -11,6 +11,7 @@ namespace GraderBot.WebAPI
 {
     public class Program
     {
+        public static string Port => Environment.GetEnvironmentVariable("PORT") ?? "5000";
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
@@ -21,7 +22,7 @@ namespace GraderBot.WebAPI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://0.0.0.0:1234");
+                    webBuilder.UseUrls($"http://+:{Port}");
                 });
     }
 }

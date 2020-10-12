@@ -54,7 +54,6 @@ namespace GraderBot.Database.Repositories
                     .Select(o => new Result { Output = o })
                     .ToArray(),
                 Source = problemArchive,
-                Guid = Guid.NewGuid()
             });
 
             return await DbSet.AddAsync(problem);
@@ -63,7 +62,7 @@ namespace GraderBot.Database.Repositories
         public async Task<IEnumerable<string>> GetProblemNamesByTypeAndNamePatternAsync(string type, string pattern)
         {
             return await DbSet
-                .Where(p => p.Type == GetTypeFromString(type) && p.Name.ToLower().Contains(pattern.ToLower()) )
+                .Where(p => p.Type == GetTypeFromString(type) && p.Name.ToLower().Contains(pattern.ToLower()))
                 .Select(p => p.Name)
                 .ToListAsync();
         }
@@ -77,6 +76,19 @@ namespace GraderBot.Database.Repositories
                 .Where(p => p.Type == GetTypeFromString(type) && p.Name.ToLower() == problemName.ToLower())
                 .Select(p => p.Description)
                 .FirstAsync();
+        }
+
+        public async Task DeleteProblemAsync(string type, string problemName)
+        {
+            var problem = await DbSet
+                .Include(p => p.Solutions)
+                .ThenInclude(s => s.Results)
+                .Where(p => p.Type == GetTypeFromString(type) && p.Name == problemName)
+                .FirstOrDefaultAsync();
+
+            _dbContext.Results.RemoveRange(problem.Solutions.SelectMany(s => s.Results));
+            _dbContext.Solutions.RemoveRange(problem.Solutions);
+            DbSet.Remove(problem);
         }
     }
 }

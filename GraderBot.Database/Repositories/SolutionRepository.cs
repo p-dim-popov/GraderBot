@@ -23,7 +23,6 @@ namespace GraderBot.Database.Repositories
                 UserId = userId,
                 Results = results.Select(r => new Result {Output = r}).ToArray(),
                 Source = source,
-                Guid = Guid.NewGuid()
             };
 
             return await DbSet.AddAsync(solution);

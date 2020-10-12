@@ -43,6 +43,7 @@ namespace GraderBot.Database.Migrations
                         .HasMaxLength(64);
 
                     b.Property<byte[]>("Source")
+                        .IsRequired()
                         .HasColumnType("bytea");
 
                     b.Property<int>("Type")
@@ -51,6 +52,9 @@ namespace GraderBot.Database.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
+
+                    b.HasIndex("Type", "Name")
+                        .IsUnique();
 
                     b.ToTable("Problems");
                 });
@@ -65,8 +69,8 @@ namespace GraderBot.Database.Migrations
                     b.Property<string>("Output")
                         .HasColumnType("text");
 
-                    b.Property<int>("SolutionId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("SolutionId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -77,12 +81,8 @@ namespace GraderBot.Database.Migrations
 
             modelBuilder.Entity("GraderBot.Database.Models.Solution", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<Guid>("Guid")
                         .HasColumnType("uuid");
 
                     b.Property<int>("ProblemId")

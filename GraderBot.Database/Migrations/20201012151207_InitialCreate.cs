@@ -35,7 +35,7 @@ namespace GraderBot.Database.Migrations
                     Type = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     Config = table.Column<string>(nullable: false),
-                    Source = table.Column<byte[]>(nullable: true)
+                    Source = table.Column<byte[]>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,12 +52,10 @@ namespace GraderBot.Database.Migrations
                 name: "Solutions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
                     ProblemId = table.Column<int>(nullable: false),
-                    Source = table.Column<byte[]>(nullable: false),
-                    Guid = table.Column<Guid>(nullable: false)
+                    Source = table.Column<byte[]>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,7 +81,7 @@ namespace GraderBot.Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Output = table.Column<string>(nullable: true),
-                    SolutionId = table.Column<int>(nullable: false)
+                    SolutionId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,6 +98,12 @@ namespace GraderBot.Database.Migrations
                 name: "IX_Problems_AuthorId",
                 table: "Problems",
                 column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Problems_Type_Name",
+                table: "Problems",
+                columns: new[] { "Type", "Name" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Results_SolutionId",

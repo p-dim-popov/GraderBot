@@ -34,9 +34,9 @@ namespace GraderBot.WebAPI.Controllers
             if (problem is null)
                 return NotFound();
 
-            var solutionGuid = Guid.NewGuid();
+            var solutionTempGuid = Guid.NewGuid();
 
-            var solutionDirectory = Directory.CreateDirectory(Path.Combine(TempDirectory, solutionGuid.ToString()));
+            var solutionDirectory = Directory.CreateDirectory(Path.Combine(TempDirectory, solutionTempGuid.ToString()));
 
             var sourcePaths = (
                 Student: solutionDirectory.CreateSubdirectory("_src_actual_"),
@@ -59,10 +59,10 @@ namespace GraderBot.WebAPI.Controllers
                 _app.TestAsync(solutionDirectory, sourcePaths.Student, sourcePaths.Lecturer.GetDirectories("tests").First(), config.StartupClass, config.Input, true)
             );
 
-            var solution = new SolutionDto(outputs[0], outputs[1], solutionGuid.ToString().ToUpper());
-            var jsonSolution = JsonSerializer.ToJsonString(solution);
+            //TODO: add solution to database, and send real guid
 
-            //TODO: add solution to database
+            var solution = new SolutionDto(outputs[0], outputs[1], solutionTempGuid.ToString().ToUpper());
+            var jsonSolution = JsonSerializer.ToJsonString(solution);
 
             return Content(jsonSolution, MediaTypeNames.Application.Json, Encoding.UTF8);
         }
@@ -78,13 +78,12 @@ namespace GraderBot.WebAPI.Controllers
             byte[] problemArchive;
             await using (var stream = problemFiles.OpenReadStream())
             {
-                await using (var memStream = new MemoryStream())
-                {
-                    await stream.CopyToAsync(memStream);
-                    problemArchive = memStream.ToArray();
-                    using (var archive = new ZipArchive(stream, ZipArchiveMode.Read, true))
-                        archive.ExtractToDirectory(tempDirectory.FullName);
-                }
+                await using var memStream = new MemoryStream();
+                await stream.CopyToAsync(memStream);
+                problemArchive = memStream.ToArray();
+
+                using var archive = new ZipArchive(memStream, ZipArchiveMode.Read, true);
+                archive.ExtractToDirectory(tempDirectory.FullName);
             }
 
             var configFileString = await System.IO.File

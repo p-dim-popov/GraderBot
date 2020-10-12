@@ -18,6 +18,7 @@ namespace GraderBot.Database.Models
         public string Description { get; set; }
         [Required]
         public string Config { get; set; }
+        [Required]
         public byte[] Source { get; set; }
 
         public virtual ICollection<Solution> Solutions { get; set; }

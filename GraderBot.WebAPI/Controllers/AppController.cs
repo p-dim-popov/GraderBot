@@ -23,7 +23,7 @@ namespace GraderBot.WebAPI.Controllers
         protected readonly AppUnitOfWork _unitOfWork;
 
         protected static readonly string TempDirectory =
-            Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Problems\Output");
+            Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Temp");
         protected readonly string LecturerSourceDirectory;
 
         protected readonly string AppTypeName;
@@ -58,6 +58,14 @@ namespace GraderBot.WebAPI.Controllers
             return Content(await _unitOfWork.ProblemRepository
                     .GetDescriptionByTypeAndNameAsync(AppTypeName, problemName),
                 MediaTypeNames.Text.Plain, Encoding.UTF8);
+        }
+
+        [HttpPost("Delete/{problemName}")]
+        public async Task<IActionResult> Delete(string problemName)
+        {
+            await _unitOfWork.ProblemRepository.DeleteProblemAsync(AppTypeName, problemName);
+            await _unitOfWork.SaveAsync();
+            return Ok();
         }
     }
 }

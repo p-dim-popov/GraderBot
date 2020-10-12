@@ -34,6 +34,13 @@ namespace GraderBot.Database.Data
                     .IsUnique();
             });
 
+            modelBuilder.Entity<Problem>(ent =>
+            {
+                ent
+                    .HasIndex(e => new {e.Type, e.Name})
+                    .IsUnique();
+            });
+
             base.OnModelCreating(modelBuilder);
         }
     }

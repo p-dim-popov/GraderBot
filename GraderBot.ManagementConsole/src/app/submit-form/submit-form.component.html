@@ -59,10 +59,11 @@
       <button #showProblemDescriptionBtn
               (click)="onGetProblemDescription(showProblemDescriptionBtn)"
               type="button"
-              class="btn btn-secondary">Show Problem Description
+              class="btn btn-secondary" [disabled]="!isProblemSelected">Show Problem Description
       </button>
       <button #submitBtn
-              class="btn btn-primary">Submit</button>
+              class="btn btn-primary">Submit
+      </button>
     </form>
     <div class="col"></div>
   </div>
