@@ -16,7 +16,8 @@ public class TestMethodCalcArea {
         var obj = Rectangle.class
                 .getConstructor(int.class, int.class, int.class, int.class)
                 .newInstance(x1, y1, x2, y2);
-        Assertions.assertEquals(area, obj.calcArea());
+        var calcArea = Rectangle.class.getMethod("calcArea");
+        Assertions.assertEquals(area, calcArea.invoke(obj));
     }
 
     private static Stream<Arguments> providerForCheckIfCalcAreaBehavesAsExpected() {

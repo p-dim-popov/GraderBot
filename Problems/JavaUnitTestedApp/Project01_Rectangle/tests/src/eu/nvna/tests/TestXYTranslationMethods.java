@@ -41,19 +41,19 @@ public class TestXYTranslationMethods {
                     try {
                         var obj = ctor.newInstance(x1, y1, x2, y2);
                         translateX.invoke(obj, t);
-                        translateY.invoke(obj, t);
+                        translateY.invoke(obj, -t);
 
                         Assertions.assertEquals(fieldIX1.get(obj), iX1 + t);
-                        Assertions.assertEquals(fieldIY1.get(obj), iY1 + t);
+                        Assertions.assertEquals(fieldIY1.get(obj), iY1 - t);
                         Assertions.assertEquals(fieldIX2.get(obj), iX2 + t);
-                        Assertions.assertEquals(fieldIY2.get(obj), iY2 + t);
+                        Assertions.assertEquals(fieldIY2.get(obj), iY2 - t);
 
                         translateXY.invoke(obj, t);
 
                         Assertions.assertEquals(fieldIX1.get(obj), iX1 + 2 * t);
-                        Assertions.assertEquals(fieldIY1.get(obj), iY1 + 2 * t);
+                        Assertions.assertEquals(fieldIY1.get(obj), iY1);
                         Assertions.assertEquals(fieldIX2.get(obj), iX2 + 2 * t);
-                        Assertions.assertEquals(fieldIY2.get(obj), iY2 + 2 * t);
+                        Assertions.assertEquals(fieldIY2.get(obj), iY2);
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                         Assertions.fail(e);
                     }

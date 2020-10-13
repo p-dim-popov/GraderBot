@@ -34,8 +34,6 @@ public class Main {
 
         System.out.println("Tests=" + summary.getTestsFoundCount() + ","
                 + "Passed=" + summary.getTestsSucceededCount());
-
-        //TODO: RectangleHelper for methods from Rectangle through reflection
     }
 }
 

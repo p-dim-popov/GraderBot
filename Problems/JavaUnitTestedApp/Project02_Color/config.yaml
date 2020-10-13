@@ -1,0 +1,30 @@
+startupClass: eu.nvna.Main
+input:
+  - |
+    eu.nvna.tests.TestConstructors
+  - |
+    eu.nvna.tests.TestGettersSetters
+  - |
+    eu.nvna.tests.TestToString
+  - |
+    eu.nvna.tests.TestEquals
+  - |
+    eu.nvna.tests.TestCompareTo
+taskDescription: |-
+    Внимание
+        Класовете трябва да бъдат в пакет eu.nvna.classes. Препоръчително е класът Main да не съществува или да не бъде включен в крайния архив. Предава се архивирана директорията src.
+        
+    I. Да се състави клас Color, имплементиращ интерфейс Comparable:
+        Скрити член променливи
+            съставни елементи по основните цветове ( RGB ) - long и
+            общ (смесен) цвят, образуван от основните по формула:
+            256*256*RValue+256*GValue+1*BValue
+        Публични членове:
+            Конструктори:
+                1) Подразбиращ се: public Color() {}
+                2) Експлицитен-по общ цвят: public Color(long c)
+            Методи:
+                4) четене/запис – за съставните цветове по 3 get/set
+                5) Стрингова интерпретация на обектите -toString()
+                6)Еквивалентност с подадения параметър-equals(Object r)
+                7)Сравнение "<" compareTo(Object c) по избор

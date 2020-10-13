@@ -15,8 +15,10 @@ public class TestMethodCompareTo {
         var medium = ctor.newInstance(-2,2,5,5);
         var big = ctor.newInstance(-23, -211, 765, 64);
 
-        Assertions.assertEquals(1, medium.compareTo(small));
-        Assertions.assertEquals(0, medium.compareTo(medium));
-        Assertions.assertEquals(-1, medium.compareTo(big));
+        var compareTo = Rectangle.class.getMethod("compareTo", Object.class);
+
+        Assertions.assertEquals(1, compareTo.invoke(medium, small));
+        Assertions.assertEquals(0, compareTo.invoke(medium, medium));
+        Assertions.assertEquals(-1, compareTo.invoke(medium, big ));
     }
 }
