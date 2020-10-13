@@ -1,22 +1,15 @@
 <div class="container">
-  <div *ngIf="problemDescription">
-    <label for="task-description">Task Description: </label>
-    <textarea class="form-control"
-              id="task-description"
-              disabled>{{problemDescription}}</textarea>
-  </div>
   <div class="row">
     <div class="col"></div>
-    <form method="post" class="col-auto" (submit)="onSubmit($event, submitBtn)">
+    <form method="post" class="col-auto" (submit)="onSubmit($event, deleteBtn)">
       <div class="form-group">
         <!--        App Type-->
         <div class="input-group">
           <div class="input-group-prepend">
             <div class="input-group-text">Choose app type:</div>
           </div>
-          <!--   TODO: make problem name input disabled if no app type is selected       -->
           <select [(ngModel)]="appType"
-                  (change)="onProblemTypeSelect(problemInput)"
+                  (change)="onProblemTypeSelect()"
                   id="problem-types"
                   name="problem-types"
                   class="form-control">
@@ -32,13 +25,13 @@
           </div>
           <input #problemInput
                  id="problem-title"
+                 [readOnly]="!isProblemTypeSelected"
                  (input)="search(problemInput.value)"
                  [(ngModel)]="problem"
                  name="problem"
                  type="text"
                  class="form-control"
-                 placeholder="Select an app type to search"
-                 disabled>
+                 placeholder="Select an app type to search">
           <div *ngIf="!isProblemSelected" class="list-group">
             <a *ngFor="let problemName of namePattern$ | async"
                class="list-group-item list-group-item-action"
@@ -47,22 +40,10 @@
             </a>
           </div>
         </div>
-        <!--        Source Code-->
-        <div class="input-group">
-          <label for="source-code">Source code</label>
-          <input (change)="onFileSelect($event.target)"
-                 type="file"
-                 class="form-control-file"
-                 id="source-code">
-        </div>
       </div>
-      <button #showProblemDescriptionBtn
-              (click)="onGetProblemDescription(showProblemDescriptionBtn)"
-              type="button"
-              class="btn btn-secondary" [disabled]="!isProblemSelected">Show Problem Description
-      </button>
-      <button #submitBtn
-              class="btn btn-primary">Submit
+      <button #deleteBtn
+              [disabled]="!isProblemSelected"
+              class="btn btn-danger">Delete
       </button>
     </form>
     <div class="col"></div>

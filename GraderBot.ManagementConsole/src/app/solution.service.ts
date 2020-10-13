@@ -23,14 +23,4 @@ export class SolutionService {
       .post<SolutionDto>(`${this.SERVER_URL}/${appType}/Submit/${problem}`, formData)
       .toPromise());
   }
-
-  getTaskDescription(appType: string, problem: string): Observable<string> {
-    return this.httpClient
-      .get(`${this.SERVER_URL}/${appType}/Description/${problem}`, {responseType: 'text'});
-  }
-
-  getProblemsByName(appType: string, term: string): Observable<string[]> {
-    return this.httpClient
-      .get<string[]>(`${this.SERVER_URL}/${appType}/ListAll/${encodeURIComponent(term || '$^')}`);
-  }
 }

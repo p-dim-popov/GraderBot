@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {SolutionService} from '../solution.service';
+import {ProblemService} from '../problem.service';
 
 @Component({
   selector: 'app-submit-form',
-  templateUrl: './submit-form.component.html',
-  styleUrls: ['./submit-form.component.css']
+  templateUrl: './submit-solution.component.html',
+  styleUrls: ['./submit-solution.component.css']
 })
-export class SubmitFormComponent implements OnInit {
+export class SubmitSolutionComponent implements OnInit {
   apps = {
     'Java Console Application': 'JavaConsoleApp',
     'Java Unit Tested Application': 'JavaUnitTestedApp'
@@ -21,8 +22,10 @@ export class SubmitFormComponent implements OnInit {
   private searchTerms = new Subject<string>();
   private solutionFile: File;
   isProblemSelected = false;
+  isProblemTypeSelected = false;
 
   constructor(
+    private problemService: ProblemService,
     private solutionService: SolutionService,
   ) {
   }
@@ -32,7 +35,7 @@ export class SubmitFormComponent implements OnInit {
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) =>
-        this.solutionService.getProblemsByName(this.appType, term)
+        this.problemService.getProblemsByName(this.appType, term)
           .toPromise()
           .catch(err => [err.message]))
     );
@@ -65,14 +68,14 @@ export class SubmitFormComponent implements OnInit {
 
   onGetProblemDescription(showProblemDescriptionBtn: HTMLButtonElement): void {
     showProblemDescriptionBtn.disabled = true;
-    this.solutionService.getTaskDescription(this.appType, this.problem)
+    this.problemService.getTaskDescription(this.appType, this.problem)
       .subscribe(td => {
         this.problemDescription = td;
         showProblemDescriptionBtn.disabled = false;
       });
   }
 
-  onProblemTypeSelect(problemInput: HTMLInputElement): void {
-    problemInput.disabled = false;
+  onProblemTypeSelect(): void {
+    this.isProblemTypeSelected = true;
   }
 }

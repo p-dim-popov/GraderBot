@@ -4,16 +4,21 @@ import {HttpClientModule} from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import {AppComponent} from './app.component';
-import {SubmitFormComponent} from './submit-form/submit-form.component';
+import {SubmitSolutionComponent} from './submit-solution/submit-solution.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgxTextDiffModule } from 'ngx-text-diff';
 import { SolutionResultsComponent } from './solution-results/solution-results.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AddNewProblemComponent } from './add-new-problem/add-new-problem.component';
+import { DeleteProblemComponent } from './delete-problem/delete-problem.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SubmitFormComponent,
-    SolutionResultsComponent
+    SubmitSolutionComponent,
+    SolutionResultsComponent,
+    AddNewProblemComponent,
+    DeleteProblemComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +27,7 @@ import { SolutionResultsComponent } from './solution-results/solution-results.co
     HttpClientModule,
     ScrollingModule,
     NgxTextDiffModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
